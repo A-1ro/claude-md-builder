@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CLAUDE.md Builder
+
+**Generate a perfect `CLAUDE.md` for any GitHub repository in seconds.**
+
+CLAUDE.md Builder analyzes your repository's structure and key files, then uses an LLM to generate a project-specific `CLAUDE.md` — the instruction file that tells AI coding assistants (like Claude Code) how to work with your codebase.
+
+## How It Works
+
+1. Paste a GitHub repository URL
+2. The app fetches key files (package.json, README, config files, etc.) via the GitHub API
+3. An LLM generates an initial `CLAUDE.md` draft structured into sections
+4. Refine it interactively through a chat interface (5-phase guided conversation)
+5. Copy or download the final result
+
+## Features
+
+- **Instant analysis** — Automatically identifies the tech stack, build commands, code style conventions, and architecture patterns from your repo
+- **Chat-driven refinement** — A guided 5-phase conversation fills in what the static analysis can't infer (dev workflow, naming conventions, guardrails)
+- **Live preview** — Edit and preview the generated `CLAUDE.md` in real time
+- **Zero configuration** — Works with any public GitHub repository, no auth required
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [Vercel AI SDK](https://sdk.vercel.ai/) + [Groq](https://groq.com/) (LLM inference)
+- [shadcn/ui](https://ui.shadcn.com/) + Tailwind CSS
+- GitHub REST API (unauthenticated, public repos only)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+- Node.js 18+
+- A [Groq API key](https://console.groq.com/)
+
+### Setup
+
+\`\`\`bash
+git clone https://github.com/A-1ro/claude-md-builder
+cd claude-md-builder
+pnpm install
+\`\`\`
+
+Create a \`.env.local\` file:
+
+\`\`\`env
+GROQ_API_KEY=your_groq_api_key_here
+\`\`\`
+
+\`\`\`bash
 pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What is CLAUDE.md?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+\`CLAUDE.md\` is a special file recognized by [Claude Code](https://claude.ai/code) (Anthropic's CLI). When placed at the root of a repository, it gives Claude persistent context about the project — coding conventions, build commands, architecture decisions, and what to avoid. A well-written \`CLAUDE.md\` significantly improves the quality of AI-generated code for your specific codebase.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
